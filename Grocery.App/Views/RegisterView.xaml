@@ -1,0 +1,21 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:YourApp.ViewModels"
+             x:Class="YourApp.Views.RegisterView"
+             Title="Registreren">
+
+    <ContentPage.BindingContext>
+        <vm:RegisterViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+
+        <Label Text="Maak een account aan" FontSize="24" HorizontalOptions="Center"/>
+
+        <Entry Placeholder="E-mail" Text="{Binding Email}" />
+        <Entry Placeholder="Wachtwoord" IsPassword="True" Text="{Binding Password}" />
+        <Entry Placeholder="Herhaal wachtwoord" IsPassword="True" Text="{Binding ConfirmPassword}" />
+        <Button Text="Registreer" Command="{Binding RegisterCommand}" />
+
+    </StackLayout>
+</ContentPage>
