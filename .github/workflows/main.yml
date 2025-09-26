@@ -1,0 +1,34 @@
+name: .NET Build & Test
+
+# Wanneer de workflow uitgevoerd wordt
+on:
+  push:
+    branches: [ "main", "develop", "feature/*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    # Code uit de repo checken
+    - uses: actions/checkout@v3
+
+    # .NET SDK instellen
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0
+
+    # Dependencies herstellen
+    - name: Restore dependencies
+      run: dotnet restore ./OOSDD_GroceryApp_Sprint3_Studenten/OOSDD_GroceryApp_Sprint3_Studenten.csproj
+
+    # Project bouwen
+    - name: Build
+      run: dotnet build ./OOSDD_GroceryApp_Sprint3_Studenten/OOSDD_GroceryApp_Sprint3_Studenten.csproj --no-restore --configuration Release
+
+    # Tests uitvoeren
+    - name: Test
+      run: dotnet test ./OOSDD_GroceryApp_Sprint3_Studenten/OOSDD_GroceryApp_Sprint3_Studenten.csproj --no-build --verbosity normal
